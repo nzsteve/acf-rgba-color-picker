@@ -1,18 +1,15 @@
-/* @override 
-	https://neu.stempeline.de/resources/erweiterungen/acf-rgba-color-picker/assets/css/acf-rgba-color-picker.css?ver=1.0.3 */
-
 /**
- * acf-extended-color-picker CSS
+ * ACF RGBA Color Picker
  */
- 
- .acf-color-picker .wp-picker-active {
- 	z-index: 9999;
- }
- 
- .acf-color-picker .wp-picker-holder {
- 	position: absolute;
- 	z-index: 9999;
- }
+
+.acf-color-picker .wp-picker-active {
+	z-index: 9999;
+}
+
+.acf-color-picker .wp-picker-holder {
+	position: absolute;
+	z-index: 9999;
+}
 
 .acf-color-picker .iris-picker .iris-square,
 .acf-color-picker .iris-picker .iris-slider,
@@ -22,9 +19,35 @@
 .acf-color-picker .iris-picker .iris-square-vert,
 .acf-color-picker .iris-picker .iris-strip,
 .acf-color-picker .iris-picker .iris-slider-offset {
-	border-radius: 0px;
+	border-radius: 0;
 	box-shadow: none;
 	box-sizing: border-box;
+}
+
+/* Palette popup dimensions.
+   Moved out of the JS so they stay scoped to this field and never leak to
+   other color pickers on the page. */
+.acf-color-picker .iris-picker {
+	width: 256px;
+	padding-bottom: 10px;
+}
+
+.acf-color-picker .iris-picker .iris-square {
+	width: 180px;
+	height: 180px;
+	margin-left: 0;
+}
+
+.acf-color-picker .iris-picker .iris-strip {
+	width: 18px;
+	height: 180px;
+	margin-left: 10px;
+}
+
+.acf-color-picker .iris-picker .iris-palette {
+	width: 20px;
+	height: 20px;
+	margin: 4px 4px 0 0;
 }
 
 .acf-color-picker .iris-palette-container a.iris-palette,
@@ -32,25 +55,34 @@
 	border: 1px solid #ccc;
 }
 
+/* The bundled wp-color-picker-alpha library sizes the trigger button, its
+   label and the colour swatch inline (~24px). On the taller ACF 6 / WordPress
+   7 rows that leaves the control looking short and misaligned, so we override
+   the inline sizing — !important is required to beat inline styles — to match
+   the surrounding field inputs (~40px) rather than the old 30px. */
 .acf-color-picker button.button.wp-color-result {
-	height: 30px!important;
-	margin: 0px 6px 0px 0px!important;
+	height: 40px !important;
+	line-height: 38px !important;
+	margin: 0 6px 0 0 !important;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	box-sizing: border-box;
 }
 
-.acf-color-picker .wp-color-result-text {
-	line-height: 28px!important;
+.acf-color-picker .wp-color-result .wp-color-result-text {
+	line-height: 38px !important;
 }
 
-.acf-color-picker .color-alpha {
-	height: 28px!important;
-	border-radius: 0!important;
+.acf-color-picker .wp-color-result .color-alpha {
+	height: 100% !important;
+	top: 0 !important;
+	border-radius: 0;
 }
 
-.acf-color-picker .wp-color-result:hover {
-	border-color: #ccc!important;
-}
-
+/* Keep the value input and the clear/default button aligned with the taller
+   trigger button. */
 .acf-color-picker .wp-picker-input-wrap .valuetarget.wp-color-picker,
 .acf-color-picker .wp-picker-input-wrap .button.button-small {
-	height: 30px;
+	height: 40px !important;
+	box-sizing: border-box;
 }

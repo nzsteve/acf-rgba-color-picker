@@ -41,9 +41,9 @@ class dhz_acf_field_extended_color_picker extends acf_field {
 		);
 		
 		$this->settings = array(
-			'version'	=> '1.2.0',
+			'version'	=> '1.3.0',
 			'url'		=> plugin_dir_url( __DIR__ )
-		);		
+		);
 		
 		// do not delete!
 		parent::__construct();
@@ -71,21 +71,13 @@ class dhz_acf_field_extended_color_picker extends acf_field {
 		// register if not already (on front end)
 		// http://wordpress.stackexchange.com/questions/82718/how-do-i-implement-the-wordpress-iris-picker-into-my-plugin-on-the-front-end
 		if( !isset($wp_scripts->registered['iris']) ) {
-			
+
 			// styles
-			wp_register_style('wp-color-picker', admin_url('css/color-picker.css'), array('wp-color-picker'), '', true);
-			
+			wp_register_style('wp-color-picker', admin_url('css/color-picker.css'), array(), false);
+
 			// scripts
 			wp_register_script('iris', admin_url('js/iris.min.js'), array('jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch'), '1.0.7', true);
-			wp_register_script('wp-color-picker', admin_url('js/color-picker.min.js'), array('iris'), '', true);
-			
-			// localize
-			wp_localize_script('wp-color-picker', 'wpColorPickerL10n', array(
-				'clear'			=> __('Clear', 'acf' ),
-				'defaultString'	=> __('Default', 'acf' ),
-				'pick'			=> __('Select Color', 'acf' ),
-				'current'		=> __('Current Color', 'acf' )
-			));
+			wp_register_script('wp-color-picker', admin_url('js/color-picker.min.js'), array('iris'), false, true);
 
 		}
 
@@ -150,9 +142,9 @@ class dhz_acf_field_extended_color_picker extends acf_field {
 		
 		// render
 		?>
-		<div class="acf-color-picker" data-target="target" data-palette='<?php echo $palettes ?>' data-default="<?php echo $field['default_value'] ?>">			
+		<div class="acf-color-picker" data-target="target" data-palette="<?php echo esc_attr( $palettes ); ?>" data-default="<?php echo esc_attr( $field['default_value'] ); ?>">
 			<?php acf_hidden_input($hidden); ?>
-			<input type="text" <?php echo acf_esc_attr($text); ?> data-alpha ="true" />
+			<input type="text" <?php echo acf_esc_attr($text); ?> data-alpha="true" />
 		</div>
 		<?php
 	}	
