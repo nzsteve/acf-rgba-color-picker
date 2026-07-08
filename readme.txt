@@ -4,7 +4,7 @@ Tags: acf, acfpro, color, color picker, rgba
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,9 @@ This plugin was originally created by Thomas Meyer (https://dreihochzwo.de). It 
 
 
 == Changelog ==
+
+= v2.0.1 =
+* Fixed stale admin styling: the plugin's CSS/JS are now cache-busted by file modification time, so browsers and page caches always load the latest versions (previously the v2.0.0 display fixes could be masked by cached assets)
 
 = v2.0.0 =
 * Fixed the colour control height on WordPress 7 / ACF 6: the trigger button now measures and matches the field's own text input, so it lines up with the surrounding fields instead of appearing too short or too tall (including inside repeaters)

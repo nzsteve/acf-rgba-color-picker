@@ -41,8 +41,9 @@ class dhz_acf_field_extended_color_picker extends acf_field {
 		);
 		
 		$this->settings = array(
-			'version'	=> '2.0.0',
-			'url'		=> plugin_dir_url( __DIR__ )
+			'version'	=> '2.0.1',
+			'url'		=> plugin_dir_url( __DIR__ ),
+			'path'		=> plugin_dir_path( __DIR__ )
 		);
 		
 		// do not delete!
@@ -82,7 +83,14 @@ class dhz_acf_field_extended_color_picker extends acf_field {
 		}
 
 		$url = $this->settings['url'];
-		$version = $this->settings['version'];
+		$path = $this->settings['path'];
+
+		// Cache-bust our assets by file modification time so browsers and page
+		// caches always pick up CSS/JS changes, even when the plugin version
+		// string has not been bumped. Fall back to the plugin version if the
+		// file cannot be read.
+		$css_ver = @filemtime( "{$path}assets/css/acf-rgba-color-picker.css" ) ?: $this->settings['version'];
+		$js_ver  = @filemtime( "{$path}assets/js/acf-rgba-color-picker.js" ) ?: $this->settings['version'];
 
 		// Add the Alpha Color Picker JS
 		wp_enqueue_script( 'wp-color-picker-alpha', "{$url}/assets/js/wp-color-picker-alpha.min.js", array( 'wp-color-picker' ), '2.0.0', true );
@@ -101,10 +109,10 @@ class dhz_acf_field_extended_color_picker extends acf_field {
 		) );
 
 		// register Extended Color Picker CSS
-		wp_register_style( 'acf-rgba-color-picker-style', "{$url}/assets/css/acf-rgba-color-picker.css", false, $version);
+		wp_register_style( 'acf-rgba-color-picker-style', "{$url}/assets/css/acf-rgba-color-picker.css", false, $css_ver);
 
 		// register Extended Color Picker JS
-		wp_register_script( 'acf-rgba-color-picker-script', "{$url}/assets/js/acf-rgba-color-picker.js", array('wp-color-picker-alpha'), $version, true );
+		wp_register_script( 'acf-rgba-color-picker-script', "{$url}/assets/js/acf-rgba-color-picker.js", array('wp-color-picker-alpha'), $js_ver, true );
 		
 		// enqueue styles & scripts
 		wp_enqueue_style('wp-color-picker');
