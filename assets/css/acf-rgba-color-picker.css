@@ -70,6 +70,7 @@
 	padding: 0 0 0 30px !important;
 	font-family: inherit !important;
 	font-size: 13px !important;
+	font-weight: normal !important;
 	line-height: 1 !important;
 	min-height: 30px;
 	box-sizing: border-box;
@@ -81,6 +82,7 @@
 	align-items: center !important;
 	font-family: inherit !important;
 	font-size: 13px !important;
+	font-weight: normal !important;
 	line-height: 1 !important;
 }
 
