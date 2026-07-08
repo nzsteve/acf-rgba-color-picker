@@ -108,6 +108,7 @@ This plugin was originally created by Thomas Meyer (https://dreihochzwo.de). It 
 == Changelog ==
 
 = v2.0.0 =
+* Fixed the colour control height on WordPress 7 / ACF 6: the trigger button now measures and matches the field's own text input, so it lines up with the surrounding fields instead of appearing too short or too tall (including inside repeaters)
 * New maintainer: the plugin is now maintained by Web Gurus (major version bump to signify the change of maintainership), with full credit to original creator Thomas Meyer
 * Pointed the plugin home to the public GitHub repository
 * Removed the donation link
