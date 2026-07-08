@@ -1,17 +1,20 @@
 <?php
 /*
 Plugin Name: ACF RGBA Color Picker
-Plugin URI:  https://wordpress.org/plugins/acf-rgba-color-picker/
+Plugin URI:  https://github.com/nzsteve/acf-rgba-color-picker
 Description: Adds an Advanced Custom Fields field for an extended color picker with transparency option.
-Version: 1.3.0
+Version: 2.0.0
 Requires at least: 7.0
 Requires PHP: 7.4
-Author: Thomas Meyer
-Author URI: https://dreihochzwo.de
+Author: Web Gurus
+Author URI: https://webgurus.co.nz
 Text Domain: acf-extended-color-picker
 Domain Path: /languages
 License: GPLv2 or later.
-Copyright: Thomas Meyer
+Copyright: Thomas Meyer, Web Gurus
+
+Originally created by Thomas Meyer (https://dreihochzwo.de). Now maintained by
+Web Gurus (https://webgurus.co.nz).
 */
 
 // exit if accessed directly
@@ -31,10 +34,10 @@ class dhz_acf_plugin_extended_color_picker {
 			'plugin'			=> 'ACF RGBA Color Picker',
 			'this_acf_version'	=> 0,
 			'min_acf_version'	=> '6.0.0',
-			'version'			=> '1.3.0',
+			'version'			=> '2.0.0',
 			'url'				=> plugin_dir_url( __FILE__ ),
 			'path'				=> plugin_dir_path( __FILE__ ),
-			'plugin_path'		=> 'https://wordpress.org/plugins/acf-rgba-color-picker/'
+			'plugin_path'		=> 'https://github.com/nzsteve/acf-rgba-color-picker'
 		);
 
 		// set text domain (on init to avoid loading translations too early in WP 6.7+)
