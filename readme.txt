@@ -4,7 +4,7 @@ Tags: acf, acfpro, color, color picker, rgba
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.3.1
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,9 +107,10 @@ This plugin was originally created by Thomas Meyer (https://dreihochzwo.de). It 
 
 == Changelog ==
 
-= v1.3.1 =
-* Updated plugin authorship: maintained by Web Gurus, with credit to original creator Thomas Meyer
+= v2.0.0 =
+* New maintainer: the plugin is now maintained by Web Gurus (major version bump to signify the change of maintainership), with full credit to original creator Thomas Meyer
 * Pointed the plugin home to the public GitHub repository
+* Removed the donation link
 
 = v1.3.0 =
 * Compatibility with WordPress 7 and ACF 6

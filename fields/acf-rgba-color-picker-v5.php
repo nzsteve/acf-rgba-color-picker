@@ -41,7 +41,7 @@ class dhz_acf_field_extended_color_picker extends acf_field {
 		);
 		
 		$this->settings = array(
-			'version'	=> '1.3.1',
+			'version'	=> '2.0.0',
 			'url'		=> plugin_dir_url( __DIR__ )
 		);
 		
