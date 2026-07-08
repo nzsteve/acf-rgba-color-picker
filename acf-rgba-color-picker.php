@@ -3,7 +3,7 @@
 Plugin Name: ACF RGBA Color Picker
 Plugin URI:  https://github.com/nzsteve/acf-rgba-color-picker
 Description: Adds an Advanced Custom Fields field for an extended color picker with transparency option.
-Version: 2.0.0
+Version: 2.0.1
 Requires at least: 7.0
 Requires PHP: 7.4
 Author: Web Gurus
@@ -34,7 +34,7 @@ class dhz_acf_plugin_extended_color_picker {
 			'plugin'			=> 'ACF RGBA Color Picker',
 			'this_acf_version'	=> 0,
 			'min_acf_version'	=> '6.0.0',
-			'version'			=> '2.0.0',
+			'version'			=> '2.0.1',
 			'url'				=> plugin_dir_url( __FILE__ ),
 			'path'				=> plugin_dir_path( __FILE__ ),
 			'plugin_path'		=> 'https://github.com/nzsteve/acf-rgba-color-picker'
