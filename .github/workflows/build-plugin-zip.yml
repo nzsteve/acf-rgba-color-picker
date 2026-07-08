@@ -1,0 +1,88 @@
+name: Build Plugin Zip
+
+# Builds an installable plugin zip.
+#
+# - Push a tag like `v1.3.0` (or publish a release, which creates the tag) and
+#   the zip is built with the version taken from the tag and attached to the
+#   GitHub Release, ready to download and install in WordPress.
+# - Or run it manually (workflow_dispatch) to build a zip you can download from
+#   the run's Artifacts section.
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to build (without the leading v). Leave blank for a dev build.'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+env:
+  SLUG: acf-rgba-color-picker
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine version
+        id: version
+        run: |
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          elif [ -n "${{ github.event.inputs.version }}" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+            VERSION="${VERSION#v}"
+          else
+            VERSION="0.0.0-dev"
+          fi
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "Building version ${VERSION}"
+
+      - name: Sync version to match the tag
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          # Plugin header
+          sed -i "s/^Version: .*/Version: ${VERSION}/" acf-rgba-color-picker.php
+          # 'version' => '...' entries in the plugin settings arrays
+          sed -i "s/'version'\(\s*\)=> '[^']*'/'version'\1=> '${VERSION}'/g" acf-rgba-color-picker.php
+          sed -i "s/'version'\(\s*\)=> '[^']*'/'version'\1=> '${VERSION}'/g" fields/acf-rgba-color-picker-v5.php
+          # readme stable tag
+          sed -i "s/^Stable tag: .*/Stable tag: ${VERSION}/" readme.txt
+
+      - name: Build zip
+        id: build
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          ZIP="${SLUG}-${VERSION}.zip"
+          mkdir -p "build/${SLUG}"
+          rsync -a \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude '.gitignore' \
+            --exclude 'build' \
+            ./ "build/${SLUG}/"
+          ( cd build && zip -r "../${ZIP}" "${SLUG}" )
+          echo "zip=${ZIP}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.SLUG }}-${{ steps.version.outputs.version }}
+          path: ${{ steps.build.outputs.zip }}
+
+      - name: Attach to release
+        if: ${{ github.ref_type == 'tag' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1 \
+            || gh release create "${GITHUB_REF_NAME}" --generate-notes --title "${GITHUB_REF_NAME}"
+          gh release upload "${GITHUB_REF_NAME}" "${{ steps.build.outputs.zip }}" --clobber

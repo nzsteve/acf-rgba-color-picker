@@ -2,9 +2,10 @@
 Contributors: tmconnect
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=XMLKD8H84HXB4&lc=US&item_name=Donation%20for%20WordPress%20Plugins&no_note=0&cn=Add%20a%20message%3a&no_shipping=1&currency_code=EUR
 Tags: acf, acfpro, color, color picker, rgba
-Requires at least: 4.7
-Tested up to: 6.7.1
-Stable tag: 1.2.3
+Requires at least: 7.0
+Tested up to: 7.0
+Requires PHP: 7.4
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +25,7 @@ If there are a lot of colors for the color palette, the color fields are getting
 
 Furthermore, the color picker is now absolutely positioned and this does not shift other elements of the page every time the color picker is opened.
 
-**This plugin works only with the [ACF PRO](https://www.advancedcustomfields.com/pro/) (version 5.5.0 or higher).**
+**This plugin requires [ACF](https://www.advancedcustomfields.com/) (version 6.0.0 or higher).**
 
 = Localizations =
 * English
@@ -101,6 +102,16 @@ Setting the color palette to false will disable and hide the "Color Palette" and
 
 
 == Changelog ==
+
+= v1.3.0 =
+* Compatibility with WordPress 7 and ACF 6
+* Fixed the color control display inside repeater rows on the taller WordPress 7 admin UI (removed the hardcoded control heights)
+* Modernised the field JavaScript to the current ACF field API (acf.Field / acf.registerFieldType)
+* Scoped the palette popup styling to each field so multiple color pickers no longer affect each other
+* Escaped field attribute output in the admin
+* Removed the deprecated wpColorPickerL10n localisation and the core wp-color-picker script override
+* Removed the donation meta box
+* Raised minimum requirements to WordPress 7.0, PHP 7.4 and ACF 6.0
 
 = v1.2.3 =
 * Fixed for PHP 8

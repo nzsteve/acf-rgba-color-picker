@@ -1,18 +1,15 @@
-/* @override 
-	https://neu.stempeline.de/resources/erweiterungen/acf-rgba-color-picker/assets/css/acf-rgba-color-picker.css?ver=1.0.3 */
-
 /**
- * acf-extended-color-picker CSS
+ * ACF RGBA Color Picker
  */
- 
- .acf-color-picker .wp-picker-active {
- 	z-index: 9999;
- }
- 
- .acf-color-picker .wp-picker-holder {
- 	position: absolute;
- 	z-index: 9999;
- }
+
+.acf-color-picker .wp-picker-active {
+	z-index: 9999;
+}
+
+.acf-color-picker .wp-picker-holder {
+	position: absolute;
+	z-index: 9999;
+}
 
 .acf-color-picker .iris-picker .iris-square,
 .acf-color-picker .iris-picker .iris-slider,
@@ -22,9 +19,35 @@
 .acf-color-picker .iris-picker .iris-square-vert,
 .acf-color-picker .iris-picker .iris-strip,
 .acf-color-picker .iris-picker .iris-slider-offset {
-	border-radius: 0px;
+	border-radius: 0;
 	box-shadow: none;
 	box-sizing: border-box;
+}
+
+/* Palette popup dimensions.
+   Moved out of the JS so they stay scoped to this field and never leak to
+   other color pickers on the page. */
+.acf-color-picker .iris-picker {
+	width: 256px;
+	padding-bottom: 10px;
+}
+
+.acf-color-picker .iris-picker .iris-square {
+	width: 180px;
+	height: 180px;
+	margin-left: 0;
+}
+
+.acf-color-picker .iris-picker .iris-strip {
+	width: 18px;
+	height: 180px;
+	margin-left: 10px;
+}
+
+.acf-color-picker .iris-picker .iris-palette {
+	width: 20px;
+	height: 20px;
+	margin: 4px 4px 0 0;
 }
 
 .acf-color-picker .iris-palette-container a.iris-palette,
@@ -32,25 +55,13 @@
 	border: 1px solid #ccc;
 }
 
+/* Keep the trigger button spaced from the input. Heights are intentionally
+   left to WP/ACF defaults instead of being pinned to 30px — the old fixed
+   heights are what made the control look short inside the taller WP 7 rows. */
 .acf-color-picker button.button.wp-color-result {
-	height: 30px!important;
-	margin: 0px 6px 0px 0px!important;
-}
-
-.acf-color-picker .wp-color-result-text {
-	line-height: 28px!important;
+	margin: 0 6px 0 0;
 }
 
 .acf-color-picker .color-alpha {
-	height: 28px!important;
-	border-radius: 0!important;
-}
-
-.acf-color-picker .wp-color-result:hover {
-	border-color: #ccc!important;
-}
-
-.acf-color-picker .wp-picker-input-wrap .valuetarget.wp-color-picker,
-.acf-color-picker .wp-picker-input-wrap .button.button-small {
-	height: 30px;
+	border-radius: 0;
 }
