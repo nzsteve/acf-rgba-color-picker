@@ -87,6 +87,19 @@ class dhz_acf_field_extended_color_picker extends acf_field {
 		// Add the Alpha Color Picker JS
 		wp_enqueue_script( 'wp-color-picker-alpha', "{$url}/assets/js/wp-color-picker-alpha.min.js", array( 'wp-color-picker' ), '2.0.0', true );
 
+		// The bundled wp-color-picker-alpha library still relies on the legacy
+		// wpColorPickerL10n global for its labels (e.g. the "Select Color"
+		// button text). Modern WordPress core no longer provides it, so define
+		// it here before the alpha script runs.
+		wp_localize_script( 'wp-color-picker-alpha', 'wpColorPickerL10n', array(
+			'clear'            => __( 'Clear', 'acf-extended-color-picker' ),
+			'clearAriaLabel'   => __( 'Clear color', 'acf-extended-color-picker' ),
+			'defaultString'    => __( 'Default', 'acf-extended-color-picker' ),
+			'defaultAriaLabel' => __( 'Select default color', 'acf-extended-color-picker' ),
+			'pick'             => __( 'Select Color', 'acf-extended-color-picker' ),
+			'defaultLabel'     => __( 'Color value', 'acf-extended-color-picker' ),
+		) );
+
 		// register Extended Color Picker CSS
 		wp_register_style( 'acf-rgba-color-picker-style', "{$url}/assets/css/acf-rgba-color-picker.css", false, $version);
 

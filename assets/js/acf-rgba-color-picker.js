@@ -25,6 +25,12 @@
 			var $control      = this.$control();
 			var fieldPalette  = $control.data('palette');
 			var defaultColor  = $control.data('default');
+
+			// Measure the field's text input height *before* wpColorPicker wraps
+			// and hides it, so we can size the trigger button to match the
+			// surrounding fields (which vary by theme / host plugin) instead of
+			// pinning it to a fixed height.
+			var inputHeight = $input.outerHeight();
 			var colorPalette;
 
 			if ( fieldPalette === 'no-palette' ) {
@@ -60,6 +66,13 @@
 			};
 
 			$input.wpColorPicker( args );
+
+			// Match the trigger button (and its inner label) to the measured
+			// input height so the control lines up with the surrounding fields.
+			if ( inputHeight ) {
+				this.$('.wp-color-result').css( 'height', inputHeight + 'px' );
+				this.$('.wp-color-result .wp-color-result-text').css( 'line-height', ( inputHeight - 2 ) + 'px' );
+			}
 
 			// Size the palette popup to fit the number of palette rows.
 			// Scoped to this field so other pickers on the page are untouched.
