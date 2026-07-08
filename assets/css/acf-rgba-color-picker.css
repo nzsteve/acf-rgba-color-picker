@@ -55,21 +55,38 @@
 	border: 1px solid #ccc;
 }
 
-/* The bundled wp-color-picker-alpha library sizes the trigger button and the
-   colour swatch inline (~24px), which leaves the control looking short beside
-   the taller inputs in WordPress 7 / ACF 6. The button height itself is set in
-   JS to match the field's own text input (so it lines up with whatever theme
-   or host plugin surrounds it); here we just make the swatch fill that height
-   and keep the button spaced from the input. */
+/* The bundled wp-color-picker-alpha library applies inline styles to the
+   trigger button that clash with the surrounding admin UI: a fixed 24px height,
+   an 11px font on a <button> (which also doesn't inherit the page font family),
+   and a stray 6px bottom margin. The button height itself is set in JS to match
+   the field's own text input (so it lines up with whatever theme / host plugin
+   surrounds it); here we lay the button out as a flex row so the label and
+   swatch always fill that height — otherwise the button's checkerboard
+   background shows through at the bottom edge — and restore the page font. */
 .acf-color-picker button.button.wp-color-result {
+	display: inline-flex !important;
+	align-items: stretch !important;
 	margin: 0 6px 0 0 !important;
-	padding-top: 0 !important;
-	padding-bottom: 0 !important;
+	padding: 0 0 0 30px !important;
+	font-family: inherit !important;
+	font-size: 13px !important;
+	line-height: 1 !important;
+	min-height: 30px;
 	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.acf-color-picker .wp-color-result .wp-color-result-text {
+	display: flex !important;
+	align-items: center !important;
+	font-family: inherit !important;
+	font-size: 13px !important;
+	line-height: 1 !important;
 }
 
 .acf-color-picker .wp-color-result .color-alpha {
 	height: 100% !important;
 	top: 0 !important;
+	bottom: 0 !important;
 	border-radius: 0;
 }
