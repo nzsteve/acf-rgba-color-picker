@@ -55,13 +55,34 @@
 	border: 1px solid #ccc;
 }
 
-/* Keep the trigger button spaced from the input. Heights are intentionally
-   left to WP/ACF defaults instead of being pinned to 30px — the old fixed
-   heights are what made the control look short inside the taller WP 7 rows. */
+/* The bundled wp-color-picker-alpha library sizes the trigger button, its
+   label and the colour swatch inline (~24px). On the taller ACF 6 / WordPress
+   7 rows that leaves the control looking short and misaligned, so we override
+   the inline sizing — !important is required to beat inline styles — to match
+   the surrounding field inputs (~40px) rather than the old 30px. */
 .acf-color-picker button.button.wp-color-result {
-	margin: 0 6px 0 0;
+	height: 40px !important;
+	line-height: 38px !important;
+	margin: 0 6px 0 0 !important;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	box-sizing: border-box;
 }
 
-.acf-color-picker .color-alpha {
+.acf-color-picker .wp-color-result .wp-color-result-text {
+	line-height: 38px !important;
+}
+
+.acf-color-picker .wp-color-result .color-alpha {
+	height: 100% !important;
+	top: 0 !important;
 	border-radius: 0;
+}
+
+/* Keep the value input and the clear/default button aligned with the taller
+   trigger button. */
+.acf-color-picker .wp-picker-input-wrap .valuetarget.wp-color-picker,
+.acf-color-picker .wp-picker-input-wrap .button.button-small {
+	height: 40px !important;
+	box-sizing: border-box;
 }
